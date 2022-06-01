@@ -21,7 +21,7 @@ const Landing = ({ isAuthenticated }) => {
         <div className="text">
           <h1 className="x-large">Asking questions improves your learning</h1>
           <p className="lead">
-            Every month Over a Millions of Uers find Answers to their Questions,
+            Every month Over a Millions of Users find Answers to their Questions,
             We hope you find yours too.
           </p>
           <div className="links">
