@@ -2,10 +2,17 @@ const express = require('express');
 const connectDB = require('./config/db');
 const app = express();
 const path = require('path');
+
+const helmet=require('helmet');
+const compression=require('compression')
+
 require('dotenv').config();
 const PORT = process.env.PORT || 4000;
 
 connectDB();
+
+app.use(helmet());
+app.use(compression())
 
 // Init middleware
 app.use(
