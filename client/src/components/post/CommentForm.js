@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addComment } from '../../actions/post';
 
-const CommentForm = ({ postid, addComment }) => {
+const CommentForm = ({ postid}) => {
   const [text, setText] = useState('');
 
   return (
@@ -33,12 +33,4 @@ const CommentForm = ({ postid, addComment }) => {
     </div>
   );
 };
-{/* <input type='submit' className='btn btn-dark my-1' value='Submit' /> */}
-CommentForm.propTypes = {
-  addComment: PropTypes.func.isRequired
-};
-
-export default connect(
-  null,
-  { addComment }
-)(CommentForm);
+export default CommentForm;

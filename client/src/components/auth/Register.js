@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
@@ -7,15 +7,17 @@ import { register } from '../../actions/auth';
 
 import PropTypes from 'prop-types';
 /*for backend connection, http */
-const Register = ({ setAlert, register, isAuthenticated }) => {
+const Register = () => {
   /*destructured it */
+  
+  const state=useSelector(state=>state.auth)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     password2: '',
   });
-
+const dispatch=useDispatch()
   const { name, email, password, password2 } = formData;
 
   const onChange = (e) =>
@@ -54,12 +56,12 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
         console.error(err.response.data);
       } */
     } else {
-      register({ name, email, password });
+      dispatch(register({ name, email, password }));
     }
   };
 
   // Redirect after sign up
-  if (isAuthenticated) {
+  if (state.isAuthenticated) {
     return <Redirect to='/dashboard' />;
   }
   return (
@@ -117,17 +119,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     </Fragment>
   );
 };
-Register.propTypes = {
-  setAlert:
-    PropTypes.func.isRequired /*func->data type as setAlert is function */,
-  register: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool,
-};
+
 // whenver we vbring action   any state
 
-const mapStatetoprops = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-});
-export default connect(mapStatetoprops, { setAlert, register })(
+
+export default 
   Register
-); /*whwnever we use connect we have to do this */
+; /*whwnever we use connect we have to do this */

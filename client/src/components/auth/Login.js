@@ -1,11 +1,13 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useDebugValue, useState } from 'react';
 import axios from 'axios';
-import { connect } from 'react-redux'; /*For connecting redux */
+import { connect, useDispatch, useSelector } from 'react-redux'; /*For connecting redux */
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
 import { Link,Redirect } from 'react-router-dom';
 /*for backend connection, http */
-const Login = ({ login, isAuthenticated }) => {
+const Login = () => {
+  const state=useSelector(state=>state.auth)
+  const dispatch=useDispatch()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -19,11 +21,11 @@ const Login = ({ login, isAuthenticated }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    login(email, password);
+    dispatch(login(email, password));
   };
 
   // Redirecti if logged in
-  if (isAuthenticated) {
+  if (state.isAuthenticated) {
     return <Redirect to='/dashboard' />;
   }
   return (
@@ -62,14 +64,4 @@ const Login = ({ login, isAuthenticated }) => {
     </Fragment>
   );
 };
-Login.propTypes = {
-  login: PropTypes.func.isRequired /*ptfr */,
-  isAuthenticated: PropTypes.bool,
-};
-
-// If we are loggedin it rredirect us
-const mapStatetoprops = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-});
-
-export default connect(mapStatetoprops, { login })(Login);
+export default Login;

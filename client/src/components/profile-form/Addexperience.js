@@ -4,7 +4,8 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addExperience } from '../../actions/profile';
 
-const AddExperience = ({ addExperience, history }) => {
+const AddExperience = () => {
+  const history = useHistory();
   const [formdata, setformdata] = useState({
     company: '',
     title: '',
@@ -114,7 +115,7 @@ const AddExperience = ({ addExperience, history }) => {
           ></textarea>
         </div>
         <input type='submit' class='btn btn-primary my-1' />
-        <Link class='btn btn-light my-1' href='/dashboard'>
+        <Link class='btn btn-light my-1' to='/dashboard'>
           Go Back
         </Link>
       </form>
@@ -122,8 +123,4 @@ const AddExperience = ({ addExperience, history }) => {
   );
 };
 
-AddExperience.propTypes = {
-  addExperience: PropTypes.func.isRequired,
-};
-
-export default connect(null, { addExperience })(withRouter(AddExperience));
+export default AddExperience

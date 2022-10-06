@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import img1 from "../../assets/1.jpg";
 import img2 from "../../assets/2p.jpg";
 import img1c from "../../assets/1c.png";
 import img2c from "../../assets/2c.svg";
 import img3c from "../../assets/3c.svg";
-const Landing = ({ isAuthenticated }) => {
-  // if (isAuthenticated) {
-  //   return <Redirect to="/dashboard" />;
-  // }
+const Landing = () => {
+  const { isAuthenticated } = useSelector((state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+  }));
   const [rd, setrd] = useState(false);
   if (rd) {
     return <Redirect to="/register" />;
@@ -21,12 +21,13 @@ const Landing = ({ isAuthenticated }) => {
         <div className="text">
           <h1 className="x-large">Asking questions improves your learning</h1>
           <p className="lead">
-            Every month Over a Millions of Users find Answers to their Questions,
-            We hope you find yours too.
+            Every month Over a Millions of Users find Answers to their
+            Questions, We hope you find yours too.
           </p>
           <div className="links">
             <p> Come Join us</p>
-            <button style={{cursor:"pointer"}}
+            <button
+              style={{ cursor: "pointer" }}
               onClick={() => {
                 setrd(true);
               }}
@@ -69,11 +70,4 @@ const Landing = ({ isAuthenticated }) => {
   );
 };
 
-Landing.prototype = {
-  isAuthenticvated: PropTypes.bool,
-};
-
-const mapStatetoprops = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-});
-export default connect(mapStatetoprops)(Landing);
+export default Landing;

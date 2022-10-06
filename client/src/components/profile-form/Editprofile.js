@@ -1,7 +1,7 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom'; /*to pass that history object in actions/prfoile */
-import { connect } from 'react-redux';
+import { useHistory, withRouter } from 'react-router-dom'; /*to pass that history object in actions/prfoile */
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { createprofile, getCurrentProfile } from '../../actions/profile';
 
 
@@ -20,43 +20,17 @@ const initialState = {
     instagram: ''
   };
 
-const Editprofile = ({
-  profile: { profile, loading },
-  getCurrentProfile,
-  createprofile,
-  history,
-}) => {
+const Editprofile = () => {
+  const history = useHistory();
+  const {profile,loading}=useSelector(state=>({profile:state.profile.profile,loading:state.profile.loading}));
   const [formdata, setformdata] = useState({
   initialState
   });
+  const dispatch=useDispatch();
   
-  
-  
- /* useEffect(() => {
-    getCurrentProfile();
-    // For filling the old informatiuon of user
-   /* setformdata({
-      company: loading || !profile.company ? '' : profile.company,
-      website: loading || !profile.website ? '' : profile.website,
-      location: loading || !profile.location ? '' : profile.location,
-      status: loading || !profile.status ? '' : profile.status,
-      skills: loading || !profile.skills ? '' : profile.skills,
-      githubusername:
-        loading || !profile.githubusername ? '' : profile.githubusername,
-      bio: loading || !profile.bio ? '' : profile.bio,
-      twitter: loading || !profile.twitter ? '' : profile.twitter,
-      facebook: loading || !profile.facebook ? '' : profile.facebook,
-      linkedin: loading || !profile.linkedin ? '' : profile.linkedin,
-      youtube: loading || !profile.youtube ? '' : profile.youtube,
-      instagram: loading || !profile.instagram ? '' : profile.instagram,
-    });
-  }, [
-    loading,getCurrentProfile
-  ]); /*if loading is happening or there is no profile user name, thenm it will not fill this */
-
 
  useEffect(() => {
-    if (!profile) getCurrentProfile();
+    if (!profile) dispatch(getCurrentProfile());
     if (!loading && profile) {
       const profileData = { ...initialState };
       for (const key in profile) {
@@ -96,10 +70,10 @@ const Editprofile = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    createprofile(formdata, history);
+    dispatch(createprofile(formdata, history));
   };
   return (
-    <Fragment>
+    <>
       <h1 className='large text-primary'>Create Your Profile</h1>
       <p className='lead'>
         <i className='fas fa-user'></i> Let's get some information to make your
@@ -265,27 +239,15 @@ const Editprofile = ({
         )}
 
         <input type='submit' className='btn btn-primary my-1' />
-        <a className='btn btn-light my-1' href='dashboard.html'>
+        <a className='btn btn-light my-1' href='/dashboard'>
           Go Back
         </a>
       </form>
-    </Fragment>
+    </>
   );
   };
 
 
-Editprofile.propTypes = {
-  createprofile: PropTypes.func.isRequired,
-  getCurrentProfile: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired,
-};
+export default Editprofile
 
-const mapStatetoprops = (state) => ({
-  profile: state.profile,
-});
 
-// as user will come tpo this page if he is logged in so we don't have to check mapstatetoprops or isAuthenticated
-export default connect(mapStatetoprops, { createprofile, getCurrentProfile })(
-  withRouter(Editprofile)
-);
-/*action is createprofile */

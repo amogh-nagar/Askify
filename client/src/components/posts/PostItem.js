@@ -2,17 +2,16 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'; /*for link to actual single page of posts that will have comments */
 import Moment from 'react-moment';
-import { connect } from 'react-redux'; /*we are going to have bunch pof actions like add like remove like etc */
+import { connect, useSelector } from 'react-redux'; /*we are going to have bunch pof actions like add like remove like etc */
 import { addLike, removeLike, deletepost } from '../../actions/post';
 const PostItem = ({
-  addLike,
-  removeLike,
-  deletepost,
-  auth,
+ 
   post: { _id, text, name, avatar, user, likes, comments, date },
   showactions,
-}) => (
-  <div class='post bg-white p-1 my-1'>
+}) => {
+const auth=useSelector((state)=>state.auth);
+
+  return <div class='post bg-white p-1 my-1'>
     <div>
       <Link to={`/profile/${user}`}>
         <img class='round-img' src={avatar} alt='' />
@@ -62,24 +61,5 @@ const PostItem = ({
       )}
     </div>
   </div>
-); /*user is post user and auth.user._id is logged in user */
-
-PostItem.defaultProps = {
-  showactions: true,
-};
-
-PostItem.propTypes = {
-  post: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-  addLike: PropTypes.func.isRequired,
-  removeLike: PropTypes.func.isRequired,
-  deletepost: PropTypes.func.isRequired,
-};
-
-const mapStatetoprops = (state) => ({
-  auth: state.auth,
-});
-
-export default connect(mapStatetoprops, { addLike, removeLike, deletepost })(
-  PostItem
-); /*we have to map auth state as we have to put delete option in the posts if user's post is that */
+}; /*user is post user and auth.user._id is logged in user */
+export default PostItem;

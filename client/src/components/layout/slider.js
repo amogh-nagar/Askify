@@ -3,8 +3,12 @@ import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
-const slider = ({ auth: { isAuthenticated, loading }, logout }) => {
+const slider = () => {
   const history = useHistory();
+  const { isAuthenticated,loading } = useSelector((state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    loading: state.auth.loading,
+  }));
   const authLinks = (
     <ul className="auth-mobile-ul">
       <li>
@@ -21,7 +25,7 @@ const slider = ({ auth: { isAuthenticated, loading }, logout }) => {
       </li>
       <li style={{ cursor: "pointer" }}>
         <button className="login" onClick={logout}>
-          <i className="fas fa-sign-out-alt"></i>{" "}
+          <i className="fas fa-sign-out-alt" ></i>{" "}
           <span className="hide-sm" color="white">
             {" "}
             Logout
@@ -61,11 +65,4 @@ const slider = ({ auth: { isAuthenticated, loading }, logout }) => {
   ); /*if user has logged in then loading will be false so !loading will be true */
 };
 
-Navbar.propTypes = {
-  logout: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-};
-const mapStatetoprops = (state) => ({
-  auth: state.auth,
-});
-export default connect(mapStatetoprops, { logout })(Navbar);
+export default slider;

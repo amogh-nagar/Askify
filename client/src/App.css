@@ -14,10 +14,9 @@
 }
 
 body {
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  background-color: #fff;
+  font-family: "Lora", serif;
+  font-family: "Poppins", sans-serif;
+  font-family: "Roboto Mono", monospace;
   color: rgb(13, 6, 6);
 }
 
@@ -43,7 +42,6 @@ img {
   margin-top: 6rem;
   margin-bottom: 3rem;
 }
-
 
 /* Text Styles*/
 .x-large {
@@ -210,33 +208,34 @@ img {
   opacity: 0.8;
 }
 
-.login{
+.login {
   background-color: rgb(14, 8, 8);
   padding: 6px 15px;
-  color:white;
+  color: white;
   margin: 2px 10px;
+  cursor: pointer;
   border-radius: 0.5rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 }
-.login:hover{
+.login:hover {
   color: var(--primary-color);
 }
 
-.links{
-  width:260px;
+.links {
+  width: 260px;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
-.links button{
+.links button {
   background-color: rgb(14, 8, 8);
   padding: 6px 15px;
-  color:white;
+  color: white;
   margin: 2px 10px;
   border-radius: 0.5rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 }
-.links  button:hover{
+.links button:hover {
   color: var(--primary-color);
 }
 
@@ -276,10 +275,10 @@ img {
   color: rgb(26, 12, 12);
 }
 
-.form input[type='text'],
-.form input[type='email'],
-.form input[type='password'],
-.form input[type='date'],
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"],
+.form input[type="date"],
 .form select,
 .form textarea {
   display: block;
@@ -289,7 +288,7 @@ img {
   border: 1px solid #ccc;
 }
 
-.form input[type='submit'],
+.form input[type="submit"],
 button {
   font: inherit;
 }
@@ -388,55 +387,54 @@ button {
 .para2 {
   display: flex;
   align-items: center;
-  justify-content: space-between; height: 100%;
+  justify-content: space-between;
+  height: 100%;
   width: 100%;
   margin: auto;
   font-size: 1.5em;
-  
-  }
-  .para2 .text{
-    color:black;
-    display: flex;
-    margin: 2px 1.5rem;
-    flex-direction: column;
-    width: 40%;
-    font-size: 1em;
-  }
-.landing-inner .text{
-  color:black;
+}
+.para2 .text {
+  color: black;
+  display: flex;
+  margin: 2px 1.5rem;
+  flex-direction: column;
+  width: 40%;
+  font-size: 1em;
+}
+.landing-inner .text {
+  color: black;
   display: flex;
   margin: 2px 2rem;
   flex-direction: column;
   width: 50%;
 }
-.paralist{
+.paralist {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.pl{
+.pl {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
-.img1{
-  width:30%;
+.img1 {
+  width: 30%;
   height: 50%;
   margin: 2px 3rem;
   border: 1px solid #ccc;
   display: flex;
   flex-direction: column;
 }
-.img1 img{
-
+.img1 img {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 }
-.img1 p{
+.img1 p {
   text-align: center;
-margin: 10px 2px;
+  margin: 10px 2px;
 }
-.img{
-  width:30%;
+.img {
+  width: 30%;
   height: 50%;
   margin: 2px 3rem;
 }
@@ -456,10 +454,10 @@ margin: 10px 2px;
 .profile-grid {
   display: grid;
   grid-template-areas:
-    'top top'
-    'about about'
-    'exp edu'
-    'github github';
+    "top top"
+    "about about"
+    "exp edu"
+    "github github";
   grid-gap: 1rem;
 }
 
@@ -582,44 +580,45 @@ margin: 10px 2px;
 
 /* Mobile Styles */
 @media (max-width: 700px) {
-  .landing-inner .img{
+  .landing-inner .img {
     display: none;
   }
-  .landing-inner .text{
+  .landing-inner .text {
     width: 96%;
   }
-  .landing{
+  .landing {
     margin-top: 9rem;
   }
-  .para2{
+  .para2 {
     flex-direction: column;
   }
-  .para2 .img{
+  .para2 .img {
     width: 95%;
   }
-  .para2 .text{
+  .para2 .text {
     width: 85%;
   }
-  .para2 .text h1{
+  .para2 .text h1 {
     font-size: 22px;
   }
-  .para2 .text p{
+  .para2 .text p {
     font-size: 16px;
   }
-  .pl{
+  .pl {
     flex-direction: column;
-align-items: center;
-justify-content: center;
+    align-items: center;
+    justify-content: center;
   }
-  .paralist h1{
+  .paralist h1 {
     font-size: 22px;
-width: 87%;
+    width: 87%;
   }
-  .paralist{
+  .paralist {
     margin-top: 4rem;
   }
-  .pl .img1{
-width:87%;margin-bottom: 17px !important;
+  .pl .img1 {
+    width: 87%;
+    margin-bottom: 17px !important;
   }
   .container {
     margin-top: 8rem;
@@ -641,12 +640,12 @@ width:87%;margin-bottom: 17px !important;
   .lead {
     font-size: 12px;
   }
-.links{
-  width: 100%;
-}
-.links button{
-  padding: 3px 10px;
-}
+  .links {
+    width: 100%;
+  }
+  .links button {
+    padding: 3px 10px;
+  }
   /* Navbar */
   .navbar {
     display: block;
@@ -686,11 +685,11 @@ width:87%;margin-bottom: 17px !important;
 
   .profile-grid {
     grid-template-areas:
-      'top'
-      'about'
-      'exp'
-      'edu'
-      'github';
+      "top"
+      "about"
+      "exp"
+      "edu"
+      "github";
   }
 
   .profile-about .skills {

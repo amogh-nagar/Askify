@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
@@ -9,16 +9,19 @@ import ProfileEducation from './ProfileEducation';
 import ProfileGithub from './ProfileGithub';
 
 import { getProfileById } from '../../actions/profile';
-import { Link } from 'react-router-dom';
-const Profile = ({
-  getProfileById,
-  profile: { profile, loading },
-  auth,
-  match,
-}) => {
+import { Link, useParams } from 'react-router-dom';
+const Profile = () => {
+  const match=useParams()
+  const { profile,auth, loading } = useSelector((state) => ({
+    profile: state.profile.profile,
+    auth: state.auth,
+    loading: state.profile.loading,
+  }));
+  const dispatch=useDispatch();
+
   useEffect(() => {
-    getProfileById(match.params.id);
-  }, [getProfileById, match.params.id]); /*match is link */
+    dispatch(getProfileById(match.id));
+  }, [getProfileById, match.id]); /*match is link */
 
   return (
     <Fragment>
@@ -82,14 +85,4 @@ const Profile = ({
   );
 };
 
-Profile.propTypes = {
-  getProfileById: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-};
-const mapStatetoprops = (state) => ({
-  profile: state.profile,
-  auth:
-    state.auth /*if user is logged in and bychance he is watching his own profile then we have tpo put a edit profiule button */,
-});
-export default connect(mapStatetoprops, { getProfileById })(Profile);
+export default Profile;

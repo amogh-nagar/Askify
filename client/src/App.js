@@ -22,6 +22,7 @@ import Post from './components/post/Post';
 import AddExperience from './components/profile-form/Addexperience';
 
 const App = () => {
+  
   useEffect(() => {
     if (localStorage.token) {
       setAuthtoken(localStorage.token);
@@ -33,7 +34,7 @@ const App = () => {
     // So that all compoennts can access provider
     <Provider store={store}>
       <Router>
-        <Fragment>
+        <>
           <Navbar />
           <Route exact path='/' component={Landing} />
           <section className='container'>
@@ -71,7 +72,7 @@ const App = () => {
 
             </Switch>
           </section>
-        </Fragment>
+        </>
       </Router>
     </Provider>
   );

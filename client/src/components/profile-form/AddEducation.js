@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addEducation } from '../../actions/profile';
 
-const AddEducation = ({ addEducation, history }) => {
+const AddEducation = () => {
+  const history = useHistory();
+
   const [formdata, setformdata] = useState({
     school: '',
     degree: '',
@@ -124,9 +126,4 @@ const AddEducation = ({ addEducation, history }) => {
   );
 };
 
-AddEducation.propTypes = {
-  addEducation: PropTypes.func.isRequired,
-};
-
-export default connect(null, { addEducation })(withRouter(AddEducation));
-// Don't put withRouter
+export default AddEducation

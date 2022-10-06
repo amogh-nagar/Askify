@@ -4,7 +4,7 @@ const setAuthtoken = (token) => {
   if (token) {
     axios.defaults.headers.common[
       'x-auth-token'
-    ] = token; /*If there is token set in browser then set the header x-auth-token */
+    ] = token; 
   } else {
     delete axios.defaults.headers.common['x-auth-token'];
   }

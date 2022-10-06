@@ -4,7 +4,7 @@ const auth = require('../../middleware/auth');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 const Post = require('../../models/Post');
-
+var mongoose = require('mongoose');
 const { check, validationResult } = require('express-validator');
 const request = require('request');
 const config = require('config');
@@ -55,7 +55,6 @@ router.post(
         errors: errors.array(),
       });
     }
-
     const {
       company,
       website,
@@ -71,7 +70,7 @@ router.post(
       facebook,
       // spread the rest of the fields we don't need to check
     } = req.body;
-
+    
     // Build progfile object
     const profileFields = { user: req.user.id };
 
@@ -114,18 +113,23 @@ router.post(
     if (linkedin) {
       profileFields.social.linkedin = linkedin;
     }
-
+console.log(req.user)
     try {
-      let profile = await Profile.findOne({ user: req.user._id });
+      let profile = await Profile.findOne({ user:mongoose.Types.ObjectId(req.user.id) });
       /*If profile found then update*/
+      console.log(profile)
       if (profile) {
         // Update
-        profile = await Profile.findByIdAndUpdate(
-          { user: req.user.id },
-          { $set: profileFields },
-          { new: true }
-        );
-
+        profile.company=profileFields.company;
+        profile.website=profileFields.website;
+        profile.location=profileFields.location;
+        profile.bio=profileFields.bio;
+        profile.status=profileFields.status;
+        profile.githubusername=profileFields.githubusername;
+        profile.skills=profileFields.skills;
+        profile.social=profileFields.social;
+        await profile.save();
+        
         return res.json(profile);
       }
 
@@ -384,6 +388,7 @@ router.get('/github/:username', async (req, res) => {
             'NO github profile found' /*If we don't put this 'return' then we will face cannot set headers */,
         }); /*If there is not github profile */
       }
+      console.log(body)
       res.json(
         JSON.parse(body)
       ); /*body will contyain encryped quotes to convert it into normal string */

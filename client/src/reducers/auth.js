@@ -21,11 +21,12 @@ function authReducer(state = initialState, action) {
 
   switch (type) {
     case USER_LOADED:
+      console.log(payload);
       return {
         ...state,
         isAuthenticated: true,
         loading: false,
-        user: payload /*name,email,avatar(except password) */,
+        user: payload 
       };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
@@ -36,14 +37,14 @@ function authReducer(state = initialState, action) {
         isAuthenticated: true,
         loading: false,
       };
-    case REGISTER_FAIL: /*REGISTER_FAIL and AUTH_ERROR will do same process */
+    case REGISTER_FAIL: 
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT:
     case ACCOUNT_DELETED:
       localStorage.removeItem(
         'token'
-      ); /*as we don't want token that is not valid and presenty in localstorage */
+      );
       return {
         ...state,
         token: null,

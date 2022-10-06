@@ -7,10 +7,10 @@ import { deleteComment } from '../../actions/post';
 const CommentItem = ({
   postid,
   comment: { _id, text, name, avatar, user, date },
-  auth,
-  deleteComment,
-}) => (
-  <div class='post bg-white p-1 my-1'>
+  
+}) => {
+const auth=useSelector((state)=>state.auth);
+  return <div class='post bg-white p-1 my-1'>
     <div>
       <Link to={`/profile/${user}`}>
         <img class='round-img' src={avatar} alt='' />
@@ -33,19 +33,8 @@ const CommentItem = ({
       )}
     </div>
   </div>
-);
-
-CommentItem.propTypes = {
-  postid: PropTypes.number.isRequired,
-  comment: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-  deleteComment: PropTypes.func.isRequired,
 };
 
-const mapStatetoprops = (state) => ({
-  auth: state.auth,
-});
-
-export default connect(mapStatetoprops, { deleteComment })(CommentItem);
+export default CommentItem;
 
 // 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200'

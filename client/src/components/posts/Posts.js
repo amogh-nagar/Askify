@@ -1,26 +1,32 @@
-import React, { Fragment, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import PostItem from './PostItem';
-import PostForm from './PostForm';
-import Spinner from '../layout/Spinner';
-import { getPosts } from '../../actions/post';
+import React, { Fragment, useEffect } from "react";
+import PropTypes from "prop-types";
+import { connect, useDispatch, useSelector } from "react-redux";
+import PostItem from "./PostItem";
+import PostForm from "./PostForm";
+import Spinner from "../layout/Spinner";
+import { getPosts } from "../../actions/post";
 
-const Posts = ({ getPosts, post: { posts, loading } }) => {
+const Posts = () => {
+  const { posts, loading } = useSelector((state) => ({
+    posts: state.post.posts,
+    loading: state.post.loading,
+  }));
+  const dispatch=useDispatch();
+
   useEffect(() => {
-    getPosts();
+    dispatch(getPosts())
   }, [getPosts]);
 
   return loading ? (
     <Spinner />
   ) : (
     <Fragment>
-      <h1 className='large text-primary'>Posts</h1>
-      <p className='lead'>
-        <i className='fas fa-user' /> Welcome to the community
+      <h1 className="large text-primary">Posts</h1>
+      <p className="lead">
+        <i className="fas fa-user" /> Welcome to the community
       </p>
       <PostForm />
-      <div className='posts'>
+      <div className="posts">
         {posts.map((post) => (
           <PostItem key={post._id} post={post} />
         ))}
@@ -29,13 +35,4 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
   );
 };
 
-Posts.propTypes = {
-  getPosts: PropTypes.func.isRequired,
-  post: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  post: state.post,
-});
-
-export default connect(mapStateToProps, { getPosts })(Posts);
+export default Posts;

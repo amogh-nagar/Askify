@@ -1,12 +1,15 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState,  } from 'react';
 import PropTypes from 'prop-types';
 import {
   Link,
+  useHistory,
   withRouter,
 } from 'react-router-dom'; /*to pass that history object in actions/prfoile */
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { createprofile } from '../../actions/profile';
-const Createprofile = ({ createprofile, history }) => {
+const Createprofile = () => {
+  const history = useHistory();
+
   const [formdata, setformdata] = useState({
     company: '',
     website: '',
@@ -21,7 +24,7 @@ const Createprofile = ({ createprofile, history }) => {
     youtube: '',
     instagram: '',
   });
-
+const dispatch=useDispatch()
   const {
     company,
     website,
@@ -47,10 +50,10 @@ const Createprofile = ({ createprofile, history }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    createprofile(formdata, history,true);
+    dispatch(createprofile(formdata, history,true));
   };
   return (
-    <Fragment>
+    <>
       <h1 className='large text-primary'>Create Your Profile</h1>
       <p className='lead'>
         <i className='fas fa-user'></i> Let's get some information to make your
@@ -157,7 +160,7 @@ const Createprofile = ({ createprofile, history }) => {
         </div>
 
         {displaysocialinputs && (
-          <Fragment>
+          <>
             <div className='form-group social-input'>
               <i className='fab fa-twitter fa-2x'></i>
               <input
@@ -212,22 +215,17 @@ const Createprofile = ({ createprofile, history }) => {
                 onChange={(e) => onChange(e)}
               />
             </div>
-          </Fragment>
+          </>
         )}
 
         <input type='submit' className='btn btn-primary my-1' />
-        <a className='btn btn-light my-1' href='dashboard.html'>
+        <a className='btn btn-light my-1' href='/dashboard'>
           Go Back
         </a>
       </form>
-    </Fragment>
+    </>
   );
 };
 
-Createprofile.propTypes = {
-  createprofile: PropTypes.func.isRequired,
-};
 
-// as user will come tpo this page if he is logged in so we don't have to check mapstatetoprops or isAuthenticated
-export default connect(null, { createprofile })(withRouter(Createprofile));
-/*action is createprofile */
+export default Createprofile

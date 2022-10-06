@@ -25,6 +25,7 @@ router.post(
     ).isLength({ min: 3 }),
   ],
   async (req, res) => {
+    console.log('Inside regsiter')
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });

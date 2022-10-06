@@ -10,18 +10,24 @@ import {
   ADD_COMMENT,
   REMOVE_COMMENT,
 } from './types';
+import setAuthtoken from "../utils/setAuthtoken";
 
 // Get posts
 export const getPosts = () => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthtoken(localStorage.token);
+  }
   try {
     const res = await axios.get(
       '/api/post'
     ); /*WAIT KRRO JB TK ME BACKEND SE KAAM PURA KR K NA AAJAU */
+    console.log(res)
     dispatch({
       type: GET_POSTS,
       payload: res.data,
     });
   } catch (err) {
+    console.log(err)
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -31,6 +37,7 @@ export const getPosts = () => async (dispatch) => {
 
 // LIKE A POST
 export const addLike = (postid) => async (dispatch) => {
+  
   try {
     const res = await axios.put(`/api/post/like/${postid}`);
     dispatch({
@@ -98,6 +105,7 @@ export const addpost = (formdata) => async (dispatch) => {
 
     dispatch(setAlert('POST CREATED', 'success'));
   } catch (err) {
+    console.log(err)
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
