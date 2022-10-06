@@ -28,7 +28,7 @@ const dispatch=useDispatch()
       {showactions && (
         <Fragment>
           <button
-            onClick={(e) => addLike(_id)}
+            onClick={(e) => dispatch(addLike(_id))}
             type='button'
             class='btn btn-light'
           >
@@ -36,7 +36,7 @@ const dispatch=useDispatch()
             <span> {likes.length > 0 && <span>{likes.length}</span>}</span>
           </button>
           <button
-            onClick={(e) => removeLike(_id)}
+            onClick={(e) => dispatch(removeLike(_id))}
             type='button'
             class='btn btn-light'
           >
