@@ -1,12 +1,12 @@
 import React, { Fragment, useState } from 'react';
-import { Link,withRouter } from 'react-router-dom';
+import { Link,useHistory,withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { addEducation } from '../../actions/profile';
 
 const AddEducation = () => {
   const history = useHistory();
-
+const dispatch=useDispatch()
   const [formdata, setformdata] = useState({
     school: '',
     degree: '',
@@ -45,7 +45,7 @@ const AddEducation = () => {
         className='form'
         onSubmit={(e) => {
           e.preventDefault();
-          addEducation(formdata, history);
+          dispatch(addEducation(formdata, history));
         }}
       >
         <div className='form-group'>

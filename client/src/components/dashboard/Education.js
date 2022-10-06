@@ -1,9 +1,11 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import Moment from 'react-moment'; /*for handling dates */
 import { deleteEducation } from "../../actions/profile";
 const Education = ({ education}) => {
+const dispatch=useDispatch()
+
   const educations = education.map((edu) => (
     <tr key={edu._id}>
       <td>{edu.school}</td>
@@ -14,7 +16,7 @@ const Education = ({ education}) => {
       </td>
       <td>
         <button
-          onClick={() => deleteEducation(edu._id)}
+          onClick={() => dispatch(deleteEducation(edu._id))}
           className='btn btn-danger'
         >
           Delete

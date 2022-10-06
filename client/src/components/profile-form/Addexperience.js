@@ -1,11 +1,12 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Link, useHistory, withRouter } from 'react-router-dom';
+import { connect, useDispatch } from 'react-redux';
 import { addExperience } from '../../actions/profile';
 
 const AddExperience = () => {
   const history = useHistory();
+  const dispatch=useDispatch()
   const [formdata, setformdata] = useState({
     company: '',
     title: '',
@@ -37,7 +38,7 @@ const AddExperience = () => {
         class='form'
         onSubmit={(e) => {
           e.preventDefault();
-          addExperience(formdata, history);
+          dispatch(addExperience(formdata, history));
         }}
       >
         <div class='form-group'>

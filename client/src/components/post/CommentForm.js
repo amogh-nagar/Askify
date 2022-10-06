@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { addComment } from '../../actions/post';
 
 const CommentForm = ({ postid}) => {
   const [text, setText] = useState('');
-
+const dispatch=useDispatch()
   return (
     <div className='post-form'>
       <div className='bg-primary p'>
@@ -15,7 +15,7 @@ const CommentForm = ({ postid}) => {
         className='form my-1'
         onSubmit={e => {
           e.preventDefault();
-          addComment(postid, { text });
+          dispatch(addComment(postid, { text }));
           setText('');
         }}
       >

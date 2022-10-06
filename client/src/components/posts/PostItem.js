@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'; /*for link to actual single page of posts that will have comments */
 import Moment from 'react-moment';
-import { connect, useSelector } from 'react-redux'; /*we are going to have bunch pof actions like add like remove like etc */
+import { connect, useDispatch, useSelector } from 'react-redux'; /*we are going to have bunch pof actions like add like remove like etc */
 import { addLike, removeLike, deletepost } from '../../actions/post';
 const PostItem = ({
  
@@ -10,7 +10,7 @@ const PostItem = ({
   showactions,
 }) => {
 const auth=useSelector((state)=>state.auth);
-
+const dispatch=useDispatch()
   return <div class='post bg-white p-1 my-1'>
     <div>
       <Link to={`/profile/${user}`}>
@@ -50,7 +50,7 @@ const auth=useSelector((state)=>state.auth);
           </Link>
           {!auth.loading && user === auth.user._id && (
             <button
-              onClick={() => deletepost(_id)}
+              onClick={() => dispatch(deletepost(_id))}
               type='button'
               class='btn btn-danger'
             >
