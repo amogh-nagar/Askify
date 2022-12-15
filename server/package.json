@@ -19,7 +19,7 @@
     "compression": "^1.7.4",
     "config": "^3.3.3",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-validator": "^6.9.0",
     "gravatar": "^1.8.1",
     "helmet": "^5.1.1",
